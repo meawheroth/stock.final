@@ -17,15 +17,14 @@ const loanSchema = new mongoose.Schema({
   borrowDate: { type: Date, required: true },
   dueDate: { type: Date, required: true, index: true },
   items: { type: [loanItemSchema], validate: (items) => items.length > 0 },
-  status: { type: String, enum: ['pending', 'approved', 'rejected', 'returned', 'dispensed'], default: 'pending', index: true },
+  status: {
+    type: String,
+    enum: ['pending', 'approved', 'rejected', 'returned', 'dispensed'],
+    default: 'pending',
+    index: true
+  },
   adminNote: { type: String, default: '' },
   history: [{ type: String }]
 }, { timestamps: true });
 
 module.exports = mongoose.model('Loan', loanSchema);
-
-    overdue: loans.filter((l) => l.status === 'approved' && l.dueDate.getTime() + 86400000 < now.getTime()).length,
-    projectCount: Object.keys(projects).length, projects: Object.values(projects), monthly });
-}));
-
-module.exports = router;
