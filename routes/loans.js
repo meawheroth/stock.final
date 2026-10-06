@@ -68,7 +68,7 @@ router.post('/:id/decision', signedIn, allowRoles('admin'), endpoint(async (req,
           );
           if (!updated) throw Object.assign(new Error(`จำนวน ${row.name} คงเหลือไม่พอ`), { status: 409 });
         }
-        if (loan.items.every((row) => row.kind === 'supply')) loan.status = 'returned';
+        if (loan.items.every((row) => row.kind === 'supply')) loan.status = 'dispensed';
         else loan.status = 'approved';
       } else loan.status = 'rejected';
 
@@ -137,19 +137,25 @@ router.get('/summary', signedIn, allowRoles('admin', 'teacher'), endpoint(async 
     const monthIndex = (loan.createdAt.getFullYear() - now.getFullYear()) * 12 + loan.createdAt.getMonth() - now.getMonth() + 5;
     if (monthIndex >= 0 && monthIndex < monthly.length) {
       monthly[monthIndex].requests += 1;
-      if (['approved', 'returned'].includes(loan.status)) monthly[monthIndex].quantity += loan.items.reduce((sum, row) => sum + row.quantity, 0);
+      if (['approved', 'returned', 'dispensed'].includes(loan.status)) monthly[monthIndex].quantity += loan.items.reduce((sum, row) => sum + row.quantity, 0);
     }
     const key = `${loan.project || 'ไม่ระบุ'} · ${loan.group || 'ไม่ระบุกลุ่ม'}`;
     if (!projects[key]) projects[key] = { project: loan.project || 'ไม่ระบุ', group: loan.group || 'ไม่ระบุกลุ่ม', requests: 0, items: 0, supplies: 0, overdue: 0 };
     projects[key].requests += 1;
     projects[key].items += loan.items.reduce((sum, row) => sum + row.quantity, 0);
-    if (['approved', 'returned'].includes(loan.status)) {
+    if (['approved', 'returned', 'dispensed'].includes(loan.status)) {
       projects[key].supplies += loan.items.filter((row) => row.kind === 'supply').reduce((sum, row) => sum + row.quantity, 0);
     }
     if (loan.status === 'approved' && loan.dueDate.getTime() + 86400000 < now.getTime()) projects[key].overdue += 1;
   }
   res.json({ pending: loans.filter((l) => l.status === 'pending').length,
     approved: loans.filter((l) => l.status === 'approved').length,
+    overdue: loans.filter((l) => l.status === 'approved' && l.dueDate.getTime() + 86400000 < now.getTime()).length,
+    projectCount: Object.keys(projects).length, projects: Object.values(projects), monthly });
+}));
+
+module.exports = router;
+
     overdue: loans.filter((l) => l.status === 'approved' && l.dueDate.getTime() + 86400000 < now.getTime()).length,
     projectCount: Object.keys(projects).length, projects: Object.values(projects), monthly });
 }));
