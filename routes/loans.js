@@ -403,6 +403,3 @@ router.get('/summary', signedIn, allowRoles('admin', 'teacher'), endpoint(async 
 }));
 
 module.exports = router;
-}));
-
-module.exports = router;
