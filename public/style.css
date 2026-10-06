@@ -1,0 +1,51 @@
+:root{--bg:#fff;--card:#fff;--tx:#262626;--mu:#666;--bd:#A9A9A9;--pr:#75292D;--ok:#477451;--bo:#75292D;--br:#75292D;--da:#A9A9A9;--lo:#777;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:'Sarabun',system-ui,sans-serif;font-size:15px}
+.wrap{max-width:1100px;margin:0 auto;padding:16px}
+h1{font-size:22px;margin:0 0 4px}
+.sub{color:var(--mu);margin:0 0 14px}
+.sum{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-bottom:14px}
+.sc{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:10px 12px}
+.sc b{display:block;font-size:22px}
+.sc span{color:var(--mu);font-size:13px}
+.bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;align-items:center}
+.tabs{display:flex;background:var(--card);border:1px solid var(--bd);border-radius:10px;overflow:hidden}
+.tabs button{border:0;background:none;color:var(--tx);padding:9px 16px;font:inherit;cursor:pointer}
+.tabs button.on{background:var(--pr);color:#fff}
+input,select,textarea{font:inherit;color:var(--tx);background:var(--card);border:1px solid var(--bd);border-radius:8px;padding:8px 10px;width:100%}
+.bar input{flex:1;min-width:150px;width:auto}
+.bar select{width:auto}
+.btn{border:1px solid var(--bd);background:var(--card);color:var(--tx);border-radius:8px;padding:8px 12px;font:inherit;cursor:pointer}
+.btn.p{background:var(--pr);border-color:var(--pr);color:#fff}
+.btn.d{color:var(--br)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:12px}
+.it{background:var(--card);border:1px solid var(--bd);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
+.im{height:130px;background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:42px}
+.im img{width:100%;height:100%;object-fit:cover}
+.bd{padding:12px;display:flex;flex-direction:column;gap:8px;flex:1}
+.nm{font-weight:700;font-size:16px}
+.mt{color:var(--mu);font-size:13px}
+.badge{display:inline-block;padding:2px 9px;border-radius:99px;font-size:12px;color:#fff;font-weight:600}
+.stk{display:flex;height:8px;border-radius:99px;overflow:hidden;background:var(--bd)}
+.st{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;text-align:center;font-size:12px;color:var(--mu)}
+.st b{display:block;font-size:16px}
+.ac{display:flex;gap:6px;margin-top:auto}
+.ac .btn{flex:1;padding:6px;font-size:13px}
+.empty{text-align:center;color:var(--mu);padding:40px}
+.ov{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:flex-start;justify-content:center;padding:16px;overflow:auto;z-index:9}
+.ov.on{display:flex}
+.md{background:var(--card);border-radius:14px;padding:18px;width:100%;max-width:520px;margin:auto}
+.md h2{margin:0 0 12px;font-size:18px}
+.f{margin-bottom:10px}
+.f label{display:block;font-size:13px;color:var(--mu);margin-bottom:3px}
+.r2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.r3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.pv{width:90px;height:90px;object-fit:cover;border-radius:8px;margin-top:6px;display:none}
+.lg{max-height:130px;overflow:auto;font-size:12px;color:var(--mu);border-top:1px solid var(--bd);margin-top:10px;padding-top:8px}
+.foot{display:flex;justify-content:flex-end;gap:8px;margin-top:12px}
+.err{color:var(--br);font-size:13px;min-height:18px}
+.wrap{padding:24px 18px 48px}.appHead{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--bd);padding-bottom:14px}.appHead h1{font-size:26px;color:var(--pr)}.userArea{display:flex;align-items:center;gap:12px;color:var(--mu)}
+.mainNav{display:flex;gap:8px;border-bottom:1px solid var(--bd);padding:12px 0 16px;margin-bottom:18px}.navBtn{border:1px solid var(--bd);background:#fff;color:var(--tx);border-radius:8px;padding:9px 16px;font:inherit;cursor:pointer}.navBtn.on,.navBtn:hover{background:var(--pr);color:#fff;border-color:var(--pr)}
+.page h2{font-size:22px;margin:0 0 12px}.page h3{margin:0 0 8px}.sectionHead{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:8px 0 14px}.sectionHead h2,.sectionHead h3{margin:0}.loanList{display:grid;gap:10px}.loanCard{background:var(--card);border:1px solid var(--bd);border-left:4px solid var(--pr);border-radius:12px;padding:14px}.loanTop{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}.loanTop h3{font-size:17px}.loanDates,.history{color:var(--mu);font-size:13px;margin-top:8px}.loanItems{border-top:1px solid #ddd;margin-top:10px;padding-top:6px}.loanItem{display:grid;grid-template-columns:1fr auto auto;gap:10px;align-items:center;padding:6px 0}.loanBadge{display:inline-block;border-radius:99px;padding:4px 10px;background:#eee;color:#333;font-size:12px;white-space:nowrap}.loanBadge.pending,.loanBadge.late{background:#75292D;color:#fff}.loanBadge.approved{background:#A9A9A9;color:#222}.loanBadge.returned{background:#eee;color:#333}.loanActions{display:flex;gap:8px;justify-content:flex-end;margin-top:10px}.filters{max-width:250px;margin-bottom:12px}.login{min-height:100vh;background:#f5f5f5;display:flex;justify-content:center;align-items:center;padding:20px}.loginCard{background:#fff;border:1px solid var(--bd);border-top:6px solid var(--pr);border-radius:14px;padding:26px;width:100%;max-width:420px;box-shadow:0 10px 30px #0001}.loginCard h1{font-size:24px}.brandMark{font-weight:700;color:var(--pr);margin-bottom:10px}.wide{width:100%;margin-top:6px}.linkBtn{border:0;background:none;color:var(--pr);font:inherit;padding:12px 0 0;cursor:pointer}.userForm{max-width:520px;background:#fff;border:1px solid var(--bd);padding:16px;border-radius:12px}.userRow{display:grid;grid-template-columns:1fr 1.5fr auto;gap:12px;padding:10px;border-bottom:1px solid #ddd}.loanRequestRow{display:grid;grid-template-columns:1fr 90px auto;gap:8px;margin-bottom:8px}.loanRequestRow input{width:90px}.mt{color:var(--mu)}
+@media(max-width:650px){.wrap{padding:14px}.appHead{align-items:flex-start;flex-direction:column;gap:8px}.userArea{width:100%;justify-content:space-between}.mainNav{overflow-x:auto}.navBtn{white-space:nowrap;padding:8px 12px}.loanTop{flex-direction:column}.loanItem{grid-template-columns:1fr auto}.loanItem button{grid-column:1/-1}.userRow{grid-template-columns:1fr}.loanRequestRow{grid-template-columns:1fr 70px auto}.loanRequestRow input{width:70px}.sectionHead{align-items:flex-start;flex-direction:column}}

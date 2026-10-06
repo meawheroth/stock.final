@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ระบบจัดการอุปกรณ์และ Stock</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<section class="login" id="loginBox">
+  <div class="loginCard"><div class="brandMark">คลังวัสดุและอุปกรณ์</div><h1 id="loginTitle">เข้าสู่ระบบ</h1>
+    <p class="sub">ระบบยืม–คืนและติดตามวัสดุอุปกรณ์</p>
+    <div class="f"><label>อีเมล</label><input id="loginEmail" type="email" autocomplete="username"></div>
+    <div class="f"><label>รหัสผ่าน</label><input id="loginPassword" type="password" autocomplete="current-password"></div>
+    <div id="registerFields" hidden>
+      <div class="f"><label>ชื่อ</label><input id="regName"></div><div class="f"><label>รหัสนักศึกษา/บุคลากร</label><input id="regId"></div>
+      <div class="f"><label>สาขา/สังกัด</label><input id="regDept"></div><div class="f"><label>เบอร์โทร</label><input id="regPhone"></div>
+      <p class="mt">รหัสผ่านต้องมีอย่างน้อย 8 ตัวอักษร</p>
+    </div>
+    <div class="err" id="loginError"></div><button class="btn p wide" id="loginButton">เข้าสู่ระบบ</button>
+    <button class="linkBtn" id="registerButton">ลงทะเบียนนักศึกษา</button>
+  </div>
+</section>
+<div class="wrap">
+  <header class="appHead"><div><h1>คลังวัสดุและอุปกรณ์</h1><p class="sub">ระบบจัดการและติดตามการยืม–คืน</p></div><div class="userArea"><span id="userLabel"></span><button class="btn" id="logout">ออกจากระบบ</button></div></header>
+  <nav class="mainNav"><button class="navBtn on" data-page="dashboard">ภาพรวม</button><button class="navBtn" data-page="inventory">คลังอุปกรณ์</button><button class="navBtn" data-page="loans">ยืม–คืน</button><button class="navBtn" data-page="users" id="usersTab" hidden>ผู้ใช้งาน</button></nav>
+  <section id="dashboardPage" class="page"><h2>ภาพรวมระบบ</h2><div class="sum" id="dashStats"></div><div id="monthStats"></div><div id="projectStats"></div><div class="sectionHead"><h3>รายการรอดำเนินการและเกินกำหนด</h3><button class="btn" data-goto="loans">ดูรายการยืม</button></div><div id="dashLoans" class="loanList"></div></section>
+  <section id="inventoryPage" class="page" hidden>
+  <h2>คลังอุปกรณ์</h2>
+  <div class="sum" id="sum"></div>
+  <div class="bar">
+    <div class="tabs"><button data-k="asset" class="on">ครุภัณฑ์</button><button data-k="supply">วัสดุสิ้นเปลือง</button></div>
+    <input id="q" placeholder="ค้นหา รหัส / ชื่อ / ประเภท">
+    <select id="fs"><option value="">ทุกสถานะ</option><option value="ok">พร้อมใช้งาน</option><option value="low">เหลือน้อย</option><option value="out">หมด</option></select>
+    <button class="btn p" id="add">+ เพิ่มรายการ</button>
+  </div>
+  <div class="grid" id="list"></div>
+  </section>
+  <section id="loansPage" class="page" hidden>
+    <div class="sectionHead"><div><h2>คำขอยืมและประวัติ</h2><p class="sub">ส่งคำขอยืม ติดตามกำหนดคืน และบันทึกการรับคืน</p></div><button class="btn p" id="newLoan" hidden>+ ส่งคำขอยืม</button></div>
+    <div class="filters"><select id="loanFilter"><option value="">ทุกสถานะ</option><option value="pending">รออนุมัติ</option><option value="approved">กำลังยืม</option><option value="returned">คืนแล้ว</option><option value="rejected">ไม่อนุมัติ</option><option value="overdue">เกินกำหนด</option></select></div>
+    <div class="loanList" id="loanList"></div>
+  </section>
+  <section id="usersPage" class="page" hidden><h2>เพิ่มผู้ใช้งาน</h2><p class="sub">Admin สามารถสร้างบัญชีอาจารย์และนักศึกษาได้</p>
+    <div class="userForm"><div class="f"><label>ชื่อ</label><input id="userName"></div><div class="f"><label>รหัสนักศึกษา/บุคลากร</label><input id="userId"></div><div class="f"><label>สาขา/สังกัด</label><input id="userDept"></div><div class="f"><label>เบอร์โทร</label><input id="userPhone"></div><div class="f"><label>อีเมล</label><input id="userEmail" type="email"></div><div class="f"><label>รหัสผ่าน (อย่างน้อย 8 ตัว)</label><input id="userPassword" type="password"></div><div class="f"><label>สิทธิ์</label><select id="userRole"><option value="student">นักศึกษา</option><option value="teacher">อาจารย์</option><option value="admin">Admin</option></select></div><div class="f"><label>อาจารย์ที่ดูแล (กรณีสร้างนักศึกษา)</label><select id="userTeacher"><option value="">ยังไม่กำหนด</option></select></div><div class="err" id="userError"></div><button class="btn p" id="createUser">สร้างบัญชี</button></div>
+    <div id="userList" class="loanList"></div>
+  </section>
+</div>
+
+<div class="ov" id="loanOverlay"><div class="md"><h2>ส่งคำขอยืม</h2><p class="mt">คำขอจะรอ Admin ตรวจสอบก่อนหักจำนวนจากคลัง</p>
+  <div class="f"><label>กลุ่ม</label><input id="loanGroup" placeholder="เช่น กลุ่ม 1"></div><div class="f"><label>โปรเจกต์/วิชา</label><input id="loanProject"></div><div class="f"><label>วัตถุประสงค์</label><textarea id="loanPurpose" rows="2"></textarea></div>
+  <div class="r2"><div class="f"><label>วันที่ยืม</label><input id="loanBorrowDate" type="date"></div><div class="f"><label>กำหนดคืน</label><input id="loanDueDate" type="date"></div></div>
+  <h3>รายการอุปกรณ์</h3><div id="loanRows"></div><button class="btn" id="addLoanRow">+ เพิ่มรายการ</button><div class="err" id="loanError"></div>
+  <div class="foot"><button class="btn" data-x="loanOverlay">ยกเลิก</button><button class="btn p" id="submitLoan">ส่งคำขอ</button></div>
+</div></div>
+
+<div class="ov" id="returnOverlay"><div class="md"><h2>บันทึกการคืน</h2><p id="returnItemName" class="mt"></p><div class="f"><label>จำนวนที่รับคืน</label><input id="returnQty" type="number" min="1" value="1"></div><div class="f"><label>สภาพ</label><select id="returnCondition"><option value="available">ปกติ พร้อมใช้</option><option value="damaged">ชำรุด</option><option value="broken">เสีย</option><option value="lost">สูญหาย</option></select></div><div class="f"><label>หมายเหตุ</label><input id="returnNote"></div><div class="err" id="returnError"></div><div class="foot"><button class="btn" data-x="returnOverlay">ปิด</button><button class="btn p" id="saveReturn">บันทึกคืน</button></div></div></div>
+
+<div class="ov" id="ovF"><div class="md">
+  <h2 id="fT">เพิ่มรายการ</h2>
+  <div class="r2">
+    <div class="f"><label>หมวด</label><select id="fk"><option value="asset">ครุภัณฑ์</option><option value="supply">วัสดุสิ้นเปลือง</option></select></div>
+    <div class="f"><label>รหัสอุปกรณ์</label><input id="fc"></div>
+  </div>
+  <div class="f"><label>ชื่ออุปกรณ์</label><input id="fn"></div>
+  <div class="r2">
+    <div class="f"><label>ประเภท (เช่น คอมพิวเตอร์, เครื่องเขียน)</label><input id="fy"></div>
+    <div class="f"><label>จำนวนทั้งหมด</label><input id="ft" type="number" min="0"></div>
+  </div>
+  <div class="r2">
+    <div class="f"><label>ถูกยืม</label><input id="fb" type="number" min="0" value="0"></div>
+    <div class="f"><label>เสีย</label><input id="fr" type="number" min="0" value="0"></div>
+    <div class="f"><label>ชำรุด</label><input id="fd" type="number" min="0" value="0"></div>
+    <div class="f"><label>สูญหาย</label><input id="fl" type="number" min="0" value="0"></div>
+  </div>
+  <div class="mt" id="fa"></div>
+  <div class="f"><label>รูปภาพ</label><input id="fi" type="file" accept="image/*"><img id="pv" class="pv" alt=""></div>
+  <div class="f"><label>รายละเอียด</label><textarea id="fx" rows="2"></textarea></div>
+  <div class="err" id="fe"></div>
+  <div class="foot"><button class="btn" data-x="ovF">ยกเลิก</button><button class="btn p" id="save">บันทึก</button></div>
+</div></div>
+
+<div class="ov" id="ovM"><div class="md">
+  <h2 id="mT">ย้ายสถานะ</h2>
+  <div class="r3">
+    <div class="f"><label>จากสถานะ</label><select id="mf"></select></div>
+    <div class="f"><label>ไปสถานะ</label><select id="mt"></select></div>
+    <div class="f"><label>จำนวน</label><input id="mq" type="number" min="1" value="1"></div>
+  </div>
+  <div class="f"><label>หมายเหตุ (เช่น ชื่อผู้ยืม)</label><input id="mn"></div>
+  <div class="err" id="me"></div>
+  <div class="lg" id="mlg"></div>
+  <div class="foot"><button class="btn" data-x="ovM">ปิด</button><button class="btn p" id="mgo">ยืนยัน</button></div>
+</div></div>
+
+<script src="app.js" defer></script>
+</body>
+</html>
